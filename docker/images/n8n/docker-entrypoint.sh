@@ -1,4 +1,5 @@
 #!/bin/sh
+Starting
 if [ -d /opt/custom-certificates ]; then
   echo "Trusting custom certificates from /opt/custom-certificates."
   export NODE_OPTIONS=--use-openssl-ca $NODE_OPTIONS
@@ -11,5 +12,6 @@ if [ "$#" -gt 0 ]; then
   exec n8n "$@"
 else
   # Got started without arguments
+  echo "Starting n8n..."
   exec n8n
 fi

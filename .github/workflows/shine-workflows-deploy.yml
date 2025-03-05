@@ -1,0 +1,41 @@
+name: Deploy Shine Workflows
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: 'Docker image tag'
+        required: true
+        default: 'base'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest'
+
+      - name: Configure kubectl
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        run: |
+          echo "$KUBE_CONFIG_DATA" | base64 -d > kubeconfig
+          export KUBECONFIG=kubeconfig
+          kubectl config view
+
+      - name: Deploy shine-workflows Deployment
+        run: |
+          # Substitute the IMAGE_TAG placeholder with the provided input
+          sed -e "s|{{IMAGE_TAG}}|${{ github.event.inputs.image_tag }}|g" k8s/shine-workflows-deployment.yaml | kubectl apply -f -
+          kubectl rollout status deployment/shine-workflows-deployment
+
+      - name: Deploy shine-workflows Service
+        run: kubectl apply -f k8s/shine-workflows-service.yaml
+
+      - name: Apply HPA for shine-workflows
+        run: kubectl apply -f k8s/shine-workflows-hpa.yaml

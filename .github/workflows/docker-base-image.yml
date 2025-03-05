@@ -1,4 +1,4 @@
-name: Docker Shine Workflows Image CI
+name: Shine Workflows Docker Image
 
 on:
   workflow_dispatch:

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shine-workflows-deployment
+  labels:
+    app: shine-workflows
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shine-workflows
+  template:
+    metadata:
+      labels:
+        app: shine-workflows
+    spec:
+      containers:
+        - name: shine-workflows
+          image: "kenleren/base:shine-workflows"
+          ports:
+            - containerPort: 5678
+          env:
+            - name: DB_HOST
+              value: "shine-common-db.postgres.database.azure.com"  # e.g. "yourdb.postgres.database.azure.com"
+            - name: DB_NAME
+              value: "shine-workflows"
+            - name: DB_USER
+              value: "mp"
+            - name: DB_PASSWORD
+              value: "PepperPåBiffen24!"
