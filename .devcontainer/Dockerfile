@@ -1,4 +1,4 @@
-FROM kenleren/base:20
+FROM shinekubernetesclusterregistry.azurecr.io/shine-workflows
 
 RUN apk add --no-cache --update openssh sudo shadow bash
 RUN echo node ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/node && chmod 0440 /etc/sudoers.d/node

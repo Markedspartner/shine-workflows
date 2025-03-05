@@ -1,5 +1,5 @@
 ARG NODE_VERSION="shine-workflows"
-FROM kenleren/base:${NODE_VERSION}
+FROM shinekubernetesclusterregistry.azurecr.io/shine-workflows
 
 ARG N8N_VERSION="2";
 RUN if [ -z "$N8N_VERSION" ] ; then echo "The N8N_VERSION argument is missing!" ; exit 1; fi
