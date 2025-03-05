@@ -1,5 +1,5 @@
 ARG NODE_VERSION="shine-workflows"
-FROM shinekubernetesclusterregistry.azurecr.io/shine-workflows
+FROM shinekubernetesclusterregistry.azurecr.io/shine-workflows:latest
 
 ARG N8N_VERSION="2";
 RUN if [ -z "$N8N_VERSION" ] ; then echo "The N8N_VERSION argument is missing!" ; exit 1; fi
@@ -8,9 +8,8 @@ LABEL org.opencontainers.image.title="Shine Workflows"
 LABEL org.opencontainers.image.description="Shine Workflows"
 LABEL org.opencontainers.image.source="https://github.com/markedspartner/shine-workflows"
 LABEL org.opencontainers.image.url="https://shine-workflows.markedspartner.no"
-LABEL org.opencontainers.image.version=${N8N_VERSION}
+LABEL org.opencontainers.image.version=1.0.0
 
-ENV N8N_VERSION=${N8N_VERSION}
 ENV NODE_ENV=production
 ENV N8N_RELEASE_TYPE=stable
 RUN set -eux; \
