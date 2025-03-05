@@ -1,4 +1,4 @@
-name: Docker Base Image CI
+name: Docker Shine Workflows Image CI
 
 on:
   workflow_dispatch:
@@ -30,7 +30,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_PAT }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Login to DockerHub
         uses: docker/login-action@v3.3.0
@@ -52,4 +52,4 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/base:shine-workflows:${{ github.event.inputs.node_version }}
-            ghcr.io/markedspartner/base:${{ github.event.inputs.node_version }}
+            ghcr.io/markedspartner/shine-workflows:${{ github.event.inputs.node_version }}
