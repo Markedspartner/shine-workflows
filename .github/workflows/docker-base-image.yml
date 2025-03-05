@@ -51,5 +51,5 @@ jobs:
           provenance: false
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/base:shine-workflows:${{ github.event.inputs.node_version }}
+            ${{ secrets.DOCKER_USERNAME }}/base:shine-workflows
             ghcr.io/markedspartner/shine-workflows:${{ github.event.inputs.node_version }}
