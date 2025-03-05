@@ -53,7 +53,7 @@ spec:
               value: http
             - name: N8N_PORT
               value: "5678"
-          image: shinekubernetesclusterregistry.azurecr.io/image-workflow-1741179359433
+          image: shinekubernetesclusterregistry.azurecr.io/image-workflow-1741179359433:7bcbe048b7f0615c7ad36378c98a3251aa8d1d69
           name: n8n
           ports:
             - containerPort: 5678

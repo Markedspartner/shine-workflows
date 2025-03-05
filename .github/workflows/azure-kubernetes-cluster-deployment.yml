@@ -40,7 +40,7 @@ on:
 env:
   ACR_RESOURCE_GROUP: shine-common
   AZURE_CONTAINER_REGISTRY: shinekubernetesclusterregistry
-  CONTAINER_NAME: shine-workflows
+  CONTAINER_NAME: image-workflow-1741179359433
   CLUSTER_NAME: shine-kubernetes-cluster
   CLUSTER_RESOURCE_GROUP: shine-common
   CLUSTER_RESOURCE_TYPE: Microsoft.ContainerService/managedClusters
@@ -71,7 +71,7 @@ jobs:
       # Builds and pushes an image up to your Azure Container Registry
       - name: Build and push image to ACR
         run: |
-          az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f ${{ env.DOCKER_FILE }} ${{ env.BUILD_CONTEXT_PATH }}
+          az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:latest --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f ${{ env.DOCKER_FILE }} ${{ env.BUILD_CONTEXT_PATH }}
   deploy:
     permissions:
       actions: read
@@ -158,5 +158,5 @@ jobs:
           name: ${{ env.CLUSTER_NAME }}
           private-cluster: ${{ steps.isPrivate.outputs.PRIVATE_CLUSTER == 'true' }}
           namespace: ${{ env.NAMESPACE }}
-          #resource-type: ${{ env.CLUSTER_RESOURCE_TYPE }}
+          resource-type: ${{ env.CLUSTER_RESOURCE_TYPE }}
 
