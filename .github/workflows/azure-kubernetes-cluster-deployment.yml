@@ -45,7 +45,7 @@ env:
   CLUSTER_RESOURCE_GROUP: shine-common
   CLUSTER_RESOURCE_TYPE: Microsoft.ContainerService/managedClusters
   DEPLOYMENT_MANIFEST_PATH: ./manifests
-  DOCKER_FILE: ./docker/images/n8n/Dockerfile
+  DOCKER_FILE: ./docker/images/n8n-custom/Dockerfile
   BUILD_CONTEXT_PATH: ./
   NAMESPACE: shine-workflows
   ENABLENAMESPACECREATION: false
