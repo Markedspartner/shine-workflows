@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    service: n8n
-  name: n8n
+    service: shine-workflows
+  name: shine-workflows
   namespace: n8n
 spec:
   replicas: 1
@@ -53,7 +53,7 @@ spec:
               value: http
             - name: N8N_PORT
               value: "5678"
-          image: n8nio/n8n
+          image: shinekubernetesclusterregistry.azurecr.io/image-workflow-1741179359433:dfab29b45e415a8806b0f91a75c0364c4d7baa94
           name: n8n
           ports:
             - containerPort: 5678
