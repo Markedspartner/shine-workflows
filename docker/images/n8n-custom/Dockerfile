@@ -1,7 +1,7 @@
 ARG NODE_VERSION="shine-workflows"
 
 # 1. Create an image to build n8n
-FROM --platform=linux/amd64 shinekubernetesclusterregistry.azurecr.io/shine-workflows AS builder
+FROM --platform=linux/amd64 shinekubernetesclusterregistry.azurecr.io/image-workflow-1741179359433 AS builder
 
 # Build the application from source
 WORKDIR /src
@@ -21,7 +21,7 @@ RUN mkdir /compiled
 RUN NODE_ENV=production DOCKER_BUILD=true pnpm --filter=n8n --prod --no-optional --legacy deploy /compiled
 
 # 2. Start with a new clean image with just the code that is needed to run n8n
-FROM shinekubernetesclusterregistry.azurecr.io/shine-workflows
+FROM shinekubernetesclusterregistry.azurecr.io/image-workflow-1741179359433
 ENV NODE_ENV=production
 
 ARG N8N_RELEASE_TYPE=dev
