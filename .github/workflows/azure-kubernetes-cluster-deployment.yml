@@ -40,12 +40,12 @@ on:
 env:
   ACR_RESOURCE_GROUP: shine-common
   AZURE_CONTAINER_REGISTRY: shinekubernetesclusterregistry
-  CONTAINER_NAME: image-workflow-1741179359433
+  CONTAINER_NAME: shine-workflows
   CLUSTER_NAME: shine-kubernetes-cluster
   CLUSTER_RESOURCE_GROUP: shine-common
   CLUSTER_RESOURCE_TYPE: Microsoft.ContainerService/managedClusters
   DEPLOYMENT_MANIFEST_PATH: ./manifests
-  DOCKER_FILE: ./docker/images/n8n-base/Dockerfile
+  DOCKER_FILE: ./docker/images/n8n/Dockerfile
   BUILD_CONTEXT_PATH: ./
   NAMESPACE: shine-workflows
   ENABLENAMESPACECREATION: false
@@ -71,7 +71,7 @@ jobs:
       # Builds and pushes an image up to your Azure Container Registry
       - name: Build and push image to ACR
         run: |
-          az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f ${{ env.DOCKER_FILE }} ${{ env.BUILD_CONTEXT_PATH }}
+          az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f ${{ env.DOCKER_FILE }} ${{ env.BUILD_CONTEXT_PATH }}
   deploy:
     permissions:
       actions: read
