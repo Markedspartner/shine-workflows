@@ -1,5 +1,5 @@
-ARG NODE_VERSION="shine-workflows"
-FROM shinekubernetesclusterregistry.azurecr.io/image-workflow-1741179359433:7bcbe048b7f0615c7ad36378c98a3251aa8d1d69
+ARG NODE_VERSION=20
+FROM n8nio/base:${NODE_VERSION}
 
 ARG N8N_VERSION="2";
 RUN if [ -z "$N8N_VERSION" ] ; then echo "The N8N_VERSION argument is missing!" ; exit 1; fi
