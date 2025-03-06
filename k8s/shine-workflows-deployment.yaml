@@ -6,7 +6,7 @@ metadata:
   name: shine-workflows
   namespace: n8n
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       service: n8n
@@ -17,6 +17,8 @@ spec:
       labels:
         service: n8n
     spec:
+      imagePullSecrets:
+        - name: azurecrkey
       initContainers:
         - name: volume-permissions
           image: busybox:1.36
@@ -53,8 +55,9 @@ spec:
               value: http
             - name: N8N_PORT
               value: "5678"
-          image: shinekubernetesclusterregistry.azurecr.io/image-workflow-1741179359433:7bcbe048b7f0615c7ad36378c98a3251aa8d1d69
-          name: n8n
+          image: shinekubernetesclusterregistry.azurecr.io/image-workflow-1741179359433:0.0.1
+          imagePullPolicy: Always
+          name: shine-workflows
           ports:
             - containerPort: 5678
           resources:

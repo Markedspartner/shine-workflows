@@ -1,7 +1,7 @@
-ARG NODE_VERSION=20
-FROM n8nio/base:${NODE_VERSION}
+FROM node:20-alpine
 
 ARG N8N_VERSION="2";
+
 RUN if [ -z "$N8N_VERSION" ] ; then echo "The N8N_VERSION argument is missing!" ; exit 1; fi
 
 LABEL org.opencontainers.image.title="Shine Workflows"
@@ -12,8 +12,9 @@ LABEL org.opencontainers.image.version=1.0.0
 
 ENV NODE_ENV=production
 ENV N8N_RELEASE_TYPE=stable
+USER root
 RUN set -eux; \
-	npm install -g --omit=dev n8n --ignore-scripts && \
+	npm install -g --unsafe-perm --omit=dev n8n --ignore-scripts && \
 	npm rebuild --prefix=/usr/local/lib/node_modules/n8n sqlite3 && \
 	rm -rf /usr/local/lib/node_modules/n8n/node_modules/@n8n/chat && \
 	rm -rf /usr/local/lib/node_modules/n8n/node_modules/@n8n/design-system && \
@@ -43,7 +44,7 @@ RUN \
 COPY docker-entrypoint.sh /
 
 RUN \
-	mkdir .n8n && \
+	mkdir -p .n8n && \
 	chown node:node .n8n
 ENV SHELL=/bin/sh
 USER node
