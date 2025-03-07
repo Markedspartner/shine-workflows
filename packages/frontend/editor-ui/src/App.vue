@@ -80,22 +80,6 @@ watch(route, (r) => {
 watch(defaultLocale, (newLocale) => {
 	void loadLanguage(newLocale);
 });
-
-console.log("HI KEN DID THIS");
-console.log("HI KEN DID THIS");
-console.log("HI KEN DID THIS");
-console.log("HI KEN DID THIS");
-console.log("HI KEN DID THIS");
-console.log("HI KEN DID THIS");
-console.log("HI KEN DID THIS");
-console.log("HI KEN DID THIS");
-console.log("HI KEN DID THIS");
-console.log("HI KEN DID THIS");
-
-
-
-
-
 </script>
 
 <template>
@@ -108,7 +92,6 @@ console.log("HI KEN DID THIS");
 			[$style.sidebarCollapsed]: uiStore.sidebarMenuCollapsed,
 		}"
 	>
-		<p>Hi</p>
 		<div id="app-grid" ref="appGrid" :class="$style['app-grid']">
 			<div id="banners" :class="$style.banners">
 				<BannerStack v-if="!isDemoMode" />
