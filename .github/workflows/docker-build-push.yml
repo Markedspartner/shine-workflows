@@ -1,0 +1,26 @@
+name: Docker Build & Push
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and Push Docker Image
+        env:
+          VERSION: ${{ github.event.release.tag_name }}
+          IMAGE: shinekubernetesclusterregistry.azurecr.io/image-workflow-1741179359433:${{ github.event.release.tag_name }}
+        run: |
+          echo "Using release version: $VERSION"
+          docker buildx build --platform linux/arm64,linux/amd64 \
+            -t "$IMAGE" \
+            -f ./docker/images/n8n-custom/Dockerfile \
+            --push .
+          echo "Build and push complete."
