@@ -55,7 +55,7 @@ spec:
               value: http
             - name: N8N_PORT
               value: "5678"
-          image: shinekubernetesclusterregistry.azurecr.io/image-workflow-1741179359433:0.0.5
+          image: shinekubernetesclusterregistry.azurecr.io/image-workflow-1741179359433:0.0.6
           imagePullPolicy: Always
           name: shine-workflows
           ports:

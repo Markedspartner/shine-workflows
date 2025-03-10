@@ -41,12 +41,13 @@ ENV N8N_RELEASE_TYPE=${N8N_RELEASE_TYPE}
 
 WORKDIR /home/node
 COPY --from=builder /compiled /usr/local/lib/node_modules/n8n
-COPY docker/images/n8n/docker-entrypoint.sh /
+COPY docker-entrypoint.sh /
 
 # Setup the Task Runner Launcher
 ARG TARGETPLATFORM
 ARG LAUNCHER_VERSION=1.1.1
-COPY docker/images/n8n/n8n-task-runners.json /etc/n8n-task-runners.json
+ARG ARCH_NAME="arm64"
+COPY n8n-task-runners.json /etc/n8n-task-runners.json
 RUN \
     if [[ "$TARGETPLATFORM" = "linux/amd64" ]]; then export ARCH_NAME="amd64"; \
     elif [[ "$TARGETPLATFORM" = "linux/arm64" ]]; then export ARCH_NAME="arm64"; fi; \
