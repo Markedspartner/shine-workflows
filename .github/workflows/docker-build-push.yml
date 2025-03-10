@@ -16,7 +16,7 @@ jobs:
       - name: Build and Push Docker Image
         env:
           VERSION: ${{ github.event.release.tag_name }}
-          IMAGE: shinekubernetesclusterregistry.azurecr.io/image-workflow-1741179359433:${{ github.event.release.tag_name }}
+          IMAGE: shinekubernetesclusterregistry.azurecr.io/shine-workflows:${{ github.event.release.tag_name }}
         run: |
           echo "Using release version: $VERSION"
           docker buildx build --platform linux/arm64,linux/amd64 \
